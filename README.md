@@ -1,7 +1,7 @@
 Description
 ===========
 
-Installs/configures something
+A skeleton for new Chef cookbooks. Fork it and adapt it to your needs.
 
 Requirements
 ============
