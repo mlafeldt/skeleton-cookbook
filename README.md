@@ -1,7 +1,11 @@
 Description
 ===========
 
-A skeleton for new Chef cookbooks. Fork it and adapt it to your needs.
+A skeleton Chef cookbook with a focus on testability. See chapter "Testing" to
+learn more.
+
+Fork the repository, adapt it to your needs, and use it as a starting point for
+new cookbooks.
 
 Requirements
 ============
