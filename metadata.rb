@@ -1,7 +1,7 @@
 name              "skeleton"
-maintainer        "Mathias Lafeldt"
-maintainer_email  "mathias.lafeldt@gmail.com"
-license           "Apache 2.0"
+maintainer        "Bigpoint GmbH"
+maintainer_email  "YOUR_NAME@bigpoint.net"
+license           "All rights reserved"
 description       "Installs/configures something"
 long_description  IO.read(File.join(File.dirname(__FILE__), 'README.md'))
 version           "1.0.0"
