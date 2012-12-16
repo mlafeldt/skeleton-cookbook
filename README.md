@@ -34,7 +34,8 @@ Installs/configures something
 Testing
 =======
 
-The cookbook comes with some testing facilities allowing you to iterate quickly.
+The cookbook comes with some testing facilities allowing you to iterate quickly
+on cookbook changes.
 
 Rake
 ----
@@ -60,23 +61,30 @@ If you prefer to let [Bundler](http://gembundler.com) install all required gems
 Berkshelf
 ---------
 
-[Berkshelf](http://berkshelf.com) is used to install the cookbook's dependencies
-(as defined in `Berksfile`) prior to testing with Rake and Vagrant.
+[Berkshelf](http://berkshelf.com) is used to set up the cookbook and its
+dependencies (as defined in `Berksfile`) prior to testing with Rake and Vagrant.
 
 Vagrant
 -------
 
 With [Vagrant](http://vagrantup.com), you can spin up a virtual machine and run
-your cookbook via Chef Solo. This will boot the VM:
+your cookbook inside it via Chef Solo.
+
+This command will boot and provision the VM as specified in the `Vagrantfile`:
 
     $ bundle exec vagrant up
+
+(Berkshelf's Vagrant plugin will make your cookbook and its dependencies
+automatically available to Vagrant when creating or provisioning a VM.)
 
 Travis CI
 ---------
 
-The cookbook includes a configuration for [Travis CI](https://travis-ci.org).
-Simply enable Travis for your GitHub repository to get free continuous
-integration.
+The cookbook includes a configuration for [Travis CI](https://travis-ci.org) that
+will run `rake test` each time changes are pushed to GitHub. Simply enable Travis
+for your GitHub repository to get free continuous integration.
+
+[![Build Status](https://travis-ci.org/mlafeldt/skeleton-cookbook.png?branch=master)](https://travis-ci.org/mlafeldt/skeleton-cookbook)
 
 License and Author
 ==================
