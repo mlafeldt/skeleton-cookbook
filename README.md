@@ -86,7 +86,7 @@ License and Author
 
 Author:: Mathias Lafeldt (<mathias.lafeldt@gmail.com>)
 
-Copyright:: 2012, Mathias Lafeldt
+Copyright:: 2013, Mathias Lafeldt
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
