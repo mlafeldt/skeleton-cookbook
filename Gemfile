@@ -1,7 +1,8 @@
 source :rubygems
 
-gem "berkshelf",  "~>1.1.1"
-gem "chefspec",   "~>0.9.0"
-gem "foodcritic", "~>1.7.0"
-gem "rake"
-gem "vagrant",    "~>1.0.5"
+gem 'berkshelf',  '~> 1.1.3'
+gem 'chef',       '< 11.0.0'  # ChefSpec isn't Chef 11 ready yet
+gem 'chefspec',   '~> 0.9.0'
+gem 'foodcritic', '~> 1.7.0'
+gem 'rake'
+gem 'vagrant',    '~> 1.0.6'
