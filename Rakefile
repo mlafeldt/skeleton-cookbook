@@ -17,6 +17,7 @@
 #
 
 require 'chef/cookbook/metadata'
+require 'rake/clean'
 
 def cookbook_metadata
   metadata = Chef::Cookbook::Metadata.new
@@ -36,9 +37,10 @@ end
 COOKBOOK_NAME = ENV['COOKBOOK_NAME'] || cookbook_name
 COOKBOOKS_PATH = ENV['COOKBOOKS_PATH'] || 'cookbooks'
 
+CLOBBER.include COOKBOOKS_PATH, 'Berksfile.lock'
+
 
 task :setup_cookbooks do
-  rm_rf COOKBOOKS_PATH
   sh 'berks', 'install', '--path', COOKBOOKS_PATH
 end
 
