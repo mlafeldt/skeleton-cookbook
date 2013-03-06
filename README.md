@@ -44,6 +44,8 @@ provides the following tasks:
 
     $ rake -T
     rake chefspec    # Run ChefSpec examples
+    rake clean       # Remove any temporary products.
+    rake clobber     # Remove any generated file.
     rake foodcritic  # Run Foodcritic lint checks
     rake knife       # Run knife cookbook test
     rake test        # Run all tests
