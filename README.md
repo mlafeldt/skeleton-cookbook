@@ -1,28 +1,26 @@
 Description
 ===========
 
-A skeleton Chef cookbook with a focus on testability. See chapter "Testing" to
-learn more.
-
-Fork the repository, adapt it to your needs, and use it as a starting point for
-new cookbooks.
+This is a testable skeleton cookbook designed for you or your organization to
+fork and modify appropriately. The cookbook comes with everything you need to
+develop infrastructure code with Chef and feel confident about it. See chapter
+**Testing** to learn more.
 
 Requirements
 ============
 
 ## Platform:
 
-* Ubuntu
-* Debian
+*List supported platforms here*
 
 ## Cookbooks:
 
-*No dependencies defined*
+*List cookbook dependencies here*
 
 Attributes
 ==========
 
-*No attributes defined*
+*List attributes here*
 
 Recipes
 =======
@@ -35,12 +33,34 @@ Testing
 =======
 
 The cookbook comes with some testing facilities allowing you to iterate quickly
-on cookbook changes.
+on cookbook changes. After installing the required Ruby gems with Bundler, most
+of the testing can be done through convenient Rake tasks.
+
+## Bundler
+
+All tools you need for cookbook development are installed as Ruby gems using
+[Bundler](http://gembundler.com). This gives you complete control over your
+software stack and makes sure that, for example, you're using the same version
+of Chef for testing as in production.
+
+First, make sure you have Bundler (which is itself a gem):
+
+    $ gem install bundler
+
+Then let Bundler install the required gems (as defined in `Gemfile`):
+
+    $ bundle install
+
+Now you can use `bundle exec` to execute a command from the gems, for example:
+
+    $ bundle exec rake
+
+(You should keep `Gemfile.lock` checked in.)
 
 ## Rake
 
-You can execute the tests with [Rake](http://rake.rubyforge.org). The `Rakefile`
-provides the following tasks:
+The cookbook provides a couple of helpful [Rake](http://rake.rubyforge.org)
+tasks (specified in `Rakefile`):
 
     $ rake -T
     rake chefspec    # Run ChefSpec examples
@@ -50,18 +70,22 @@ provides the following tasks:
     rake knife       # Run knife cookbook test
     rake test        # Run all tests
 
-## Bundler
+As mentioned above, use `bundle exec` to start a Rake task:
 
-If you prefer to let [Bundler](http://gembundler.com) install all required gems
-(you should), run the tests this way:
-
-    $ bundle install
     $ bundle exec rake test
 
 ## Berkshelf
 
 [Berkshelf](http://berkshelf.com) is used to set up the cookbook and its
-dependencies (as defined in `Berksfile`) prior to testing with Rake and Vagrant.
+dependencies prior to testing with Rake and Vagrant.
+
+The dependencies are defined in `Berksfile`, which in turn resolves the
+dependencies in `metadata.rb`. It is good practice to specify the cookbook
+sources in `Berksfile`, while keeping the cookbook versions in `metadata.rb`
+(the authoritative source of information for Chef).
+
+During testing, dependencies are installed to the `cookbooks` directory inside
+this cookbook.
 
 ## Vagrant
 
@@ -82,6 +106,9 @@ will run `rake test` each time changes are pushed to GitHub. Simply enable Travi
 for your GitHub repository to get free continuous integration.
 
 [![Build Status](https://travis-ci.org/mlafeldt/skeleton-cookbook.png?branch=master)](https://travis-ci.org/mlafeldt/skeleton-cookbook)
+
+Implementing CI with other systems should be as simple as running the commands
+in `.travis.yml`.
 
 License and Author
 ==================
