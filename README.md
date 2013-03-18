@@ -63,12 +63,12 @@ The cookbook provides a couple of helpful [Rake](http://rake.rubyforge.org)
 tasks (specified in `Rakefile`):
 
     $ rake -T
-    rake chefspec    # Run ChefSpec examples
-    rake clean       # Remove any temporary products.
-    rake clobber     # Remove any generated file.
-    rake foodcritic  # Run Foodcritic lint checks
-    rake knife       # Run knife cookbook test
-    rake test        # Run all tests
+    rake clean        # Remove any temporary products.
+    rake clobber      # Remove any generated file.
+    rake test         # Run all tests
+    rake test:lint    # Run Foodcritic lint checks
+    rake test:spec    # Run ChefSpec examples
+    rake test:syntax  # Run Knife syntax checks
 
 As mentioned above, use `bundle exec` to start a Rake task:
 

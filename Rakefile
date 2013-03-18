@@ -39,34 +39,33 @@ COOKBOOKS_PATH = ENV['COOKBOOKS_PATH'] || 'cookbooks'
 
 CLOBBER.include COOKBOOKS_PATH, 'Berksfile.lock'
 
+namespace :test do
+  task :prepare do
+    sh 'berks', 'install', '--path', COOKBOOKS_PATH
+  end
 
-task :setup_cookbooks do
-  sh 'berks', 'install', '--path', COOKBOOKS_PATH
-end
+  desc 'Run Knife syntax checks'
+  task :syntax => :prepare do
+    sh 'knife', 'cookbook', 'test', COOKBOOK_NAME, '--config', '.knife.rb',
+       '--cookbook-path', COOKBOOKS_PATH
+  end
 
-desc 'Run knife cookbook test'
-task :knife => :setup_cookbooks do
-  sh 'knife', 'cookbook', 'test', COOKBOOK_NAME, '--config', '.knife.rb',
-     '--cookbook-path', COOKBOOKS_PATH
-end
+  desc 'Run Foodcritic lint checks'
+  task :lint => :prepare do
+    sh 'foodcritic', '--epic-fail', 'any',
+       File.join(COOKBOOKS_PATH, COOKBOOK_NAME)
+  end
 
-desc 'Run Foodcritic lint checks'
-task :foodcritic => :setup_cookbooks do
-  sh 'foodcritic', '--epic-fail', 'any',
-     File.join(COOKBOOKS_PATH, COOKBOOK_NAME)
-end
+  desc 'Run ChefSpec examples'
+  task :spec => :prepare do
+    sh 'rspec', '--color', '--format', 'documentation',
+       File.join(COOKBOOKS_PATH, COOKBOOK_NAME, 'spec')
+  end
 
-desc 'Run ChefSpec examples'
-task :chefspec => :setup_cookbooks do
-  sh 'rspec', '--color', '--format', 'documentation',
-     File.join(COOKBOOKS_PATH, COOKBOOK_NAME, 'spec')
+  task :all => [:syntax, :lint, :spec]
 end
 
 desc 'Run all tests'
-task :test => [:knife, :foodcritic, :chefspec]
+task :test => 'test:all'
 
 task :default => :test
-
-# aliases
-task :lint => :foodcritic
-task :spec => :chefspec
