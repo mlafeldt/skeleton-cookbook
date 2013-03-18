@@ -18,6 +18,7 @@
 
 require 'chef/cookbook/metadata'
 require 'rake/clean'
+require 'rspec/core/rake_task'
 
 def cookbook_metadata
   metadata = Chef::Cookbook::Metadata.new
@@ -57,10 +58,11 @@ namespace :test do
   end
 
   desc 'Run ChefSpec examples'
-  task :spec => :prepare do
-    sh 'rspec', '--color', '--format', 'documentation',
-       File.join(COOKBOOKS_PATH, COOKBOOK_NAME, 'spec')
+  RSpec::Core::RakeTask.new(:spec) do |t|
+    t.pattern = File.join(COOKBOOKS_PATH, COOKBOOK_NAME, 'spec', '*_spec.rb')
+    t.rspec_opts = '--color --format documentation'
   end
+  task :spec => :prepare
 
   task :all => [:syntax, :lint, :spec]
 end
