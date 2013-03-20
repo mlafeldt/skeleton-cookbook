@@ -67,12 +67,14 @@ The cookbook provides a couple of helpful [Rake](http://rake.rubyforge.org)
 tasks (specified in `Rakefile`):
 
     $ rake -T
-    rake clean        # Remove any temporary products.
-    rake clobber      # Remove any generated file.
-    rake test:all     # Run test:syntax, test:lint, and test:spec together
-    rake test:lint    # Run Foodcritic lint checks
-    rake test:spec    # Run ChefSpec examples
-    rake test:syntax  # Run Knife syntax checks
+    rake clean                      # Remove any temporary products.
+    rake clobber                    # Remove any generated file.
+    rake test:all                   # Run test:syntax, test:lint, test:spec, and test:integration
+    rake test:integration           # Run minitest integration tests with Vagrant
+    rake test:integration_teardown  # Tear down VM used for integration tests
+    rake test:lint                  # Run Foodcritic lint checks
+    rake test:spec                  # Run ChefSpec examples
+    rake test:syntax                # Run Knife syntax checks
 
 As mentioned above, use `bundle exec` to start a Rake task:
 
