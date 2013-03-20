@@ -65,7 +65,7 @@ tasks (specified in `Rakefile`):
     $ rake -T
     rake clean        # Remove any temporary products.
     rake clobber      # Remove any generated file.
-    rake test         # Run all tests
+    rake test:all     # Run test:syntax, test:lint, and test:spec together
     rake test:lint    # Run Foodcritic lint checks
     rake test:spec    # Run ChefSpec examples
     rake test:syntax  # Run Knife syntax checks
@@ -73,6 +73,9 @@ tasks (specified in `Rakefile`):
 As mentioned above, use `bundle exec` to start a Rake task:
 
     $ bundle exec rake test
+
+(The `test` task is an alias for `test:all` and also happens to be the default
+when no task is given.)
 
 ## Berkshelf
 

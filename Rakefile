@@ -64,10 +64,12 @@ namespace :test do
   end
   task :spec => :prepare
 
+  desc 'Run test:syntax, test:lint, and test:spec together'
   task :all => [:syntax, :lint, :spec]
 end
 
-desc 'Run all tests'
+# aliases for backwards compatibility and convenience
 task :test => 'test:all'
+task :spec => 'test:spec'
 
 task :default => :test
