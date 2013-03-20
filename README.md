@@ -6,6 +6,10 @@ fork and modify appropriately. The cookbook comes with everything you need to
 develop infrastructure code with Chef and feel confident about it. See chapter
 **Testing** to learn more.
 
+(While you're encouraged to customize everything in this cookbook to fit your
+needs, I recommend to keep the Testing chapter as an important part of this
+README.)
+
 Requirements
 ============
 
@@ -74,8 +78,28 @@ As mentioned above, use `bundle exec` to start a Rake task:
 
     $ bundle exec rake test
 
-(The `test` task is an alias for `test:all` and also happens to be the default
-when no task is given.)
+The `test` task is an alias for `test:all` and also happens to be the default
+when no task is given. All test-related tasks are described in more detail
+below.
+
+## Knife
+
+The Rake task `test:syntax` will use `knife cookbook test` to run syntax checks
+on the cookbook, validating both Ruby files and templates.
+
+## Foodcritic
+
+The Rake task `test:lint` will use [Foodcritic](http://acrmp.github.com/foodcritic/)
+to run lint checks on the cookbook. Foodcritic is configured to fail if there
+are _any_ warnings that might stop the cookbook from working.
+
+## ChefSpec
+
+The Rake task `test:spec` will run all [ChefSpec](https://github.com/acrmp/chefspec)
+examples in the `spec` directory. Built on top of RSpec, ChefSpec allows you to
+write unit tests for Chef cookbooks. It runs your cookbook - without actually
+converging a node - and lets you make assertions about the resources that were
+created. This makes it the ideal tool to get fast feedback on cookbook changes.
 
 ## Berkshelf
 
