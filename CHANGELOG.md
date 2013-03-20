@@ -1,4 +1,4 @@
 1.0.0 (Jan 1 2013)
 ------------------
 
-* First tagged version.
+* _Add your changes here_
