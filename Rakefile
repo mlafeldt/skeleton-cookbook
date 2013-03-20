@@ -53,6 +53,7 @@ namespace :test do
 
   desc 'Run Foodcritic lint checks'
   task :lint => :prepare do
+    # TODO: FoodCritic::Rake::LintTask is still experimental
     sh 'foodcritic', '--epic-fail', 'any',
        File.join(COOKBOOKS_PATH, COOKBOOK_NAME)
   end
