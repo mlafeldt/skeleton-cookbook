@@ -43,6 +43,12 @@ CLOBBER.include COOKBOOKS_PATH, 'Berksfile.lock'
 namespace :test do
   task :prepare do
     sh 'berks', 'install', '--path', COOKBOOKS_PATH
+    # run :cleanup at exit unless an exception was raised
+    at_exit { Rake::Task['test:cleanup'].invoke if $!.nil? }
+  end
+
+  task :cleanup do
+    rm_rf COOKBOOKS_PATH
   end
 
   desc 'Run Knife syntax checks'
