@@ -37,15 +37,15 @@ Testing
 =======
 
 The cookbook comes with some testing facilities allowing you to iterate quickly
-on cookbook changes. After installing the required Ruby gems with Bundler, most
+on cookbook changes. After installing Vagrant and the required Ruby gems, most
 of the testing can be done through convenient Rake tasks.
 
 ## Bundler
 
-All tools you need for cookbook development are installed as Ruby gems using
-[Bundler](http://gembundler.com). This gives you complete control over your
-software stack and makes sure that, for example, you're using the same version
-of Chef for testing as in production.
+Apart from Vagrant, which is described later on, all tools you need for cookbook
+development and testing are installed as Ruby gems using [Bundler](http://gembundler.com).
+This gives you a lot of control over the software stack ensuring that the
+testing environment matches your production environment.
 
 First, make sure you have Bundler (which is itself a gem):
 
@@ -55,7 +55,7 @@ Then let Bundler install the required gems (as defined in `Gemfile`):
 
     $ bundle install
 
-Now you can use `bundle exec` to execute a command from the gems, for example:
+Now you can use `bundle exec` to execute a command from the gemset, for example:
 
     $ bundle exec rake
 
@@ -117,14 +117,23 @@ this cookbook.
 ## Vagrant
 
 With [Vagrant](http://vagrantup.com), you can spin up a virtual machine and run
-your cookbook inside it via Chef Solo.
+your cookbook inside it via Chef Solo or Chef Client. The test setup requires to
+install **Vagrant 1.1.x** from the [Vagrant downloads page](http://downloads.vagrantup.com/).
 
-This command will boot and provision the VM as specified in the `Vagrantfile`:
+You will also need the Berkshelf Vagrant plugin, which will make your cookbook
+and its dependencies automatically available to Vagrant when creating or
+provisioning a VM:
 
-    $ bundle exec vagrant up
+    $ vagrant plugin install berkshelf-vagrant
 
-(Berkshelf's Vagrant plugin will make your cookbook and its dependencies
-automatically available to Vagrant when creating or provisioning a VM.)
+When everything is in place, this command will boot and provision the VM as
+specified in the `Vagrantfile`:
+
+    $ vagrant up
+
+In case the VM is already up, you can run the provisioners again with:
+
+    $ vagrant provision
 
 ## Travis CI
 
