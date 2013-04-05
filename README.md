@@ -103,6 +103,26 @@ write unit tests for Chef cookbooks. It runs your cookbook - without actually
 converging a node - and lets you make assertions about the resources that were
 created. This makes it the ideal tool to get fast feedback on cookbook changes.
 
+## Minitest
+
+The Rake task `test:integration` will run minitest integration tests inside a VM
+managed by Vagrant. This is done by adding the [minitest-handler cookbook] to
+Chef's run list prior to provisioning the VM. This cookbook will install
+[minitest-chef-handler] inside the VM, which in turn runs all
+`files/**/*_test.rb` files at the end of the provisioning process.
+
+In case the VM is powered off, `rake test:integration` will boot it up first.
+When you no longer need the VM for integration testing, `rake
+test:integration_teardown` will shut it down. If you rather want to provision
+from scratch, set `INTEGRATION_TEARDOWN` accordingly. For example:
+
+    $ export INTEGRATION_TEARDOWN='vagrant destroy -f'
+    $ rake test:integration_teardown
+    $ rake test:integration
+
+[minitest-chef-handler]: https://github.com/calavera/minitest-chef-handler
+[minitest-handler cookbook]: https://github.com/btm/minitest-handler-cookbook
+
 ## Berkshelf
 
 [Berkshelf](http://berkshelf.com) is used to set up the cookbook and its
