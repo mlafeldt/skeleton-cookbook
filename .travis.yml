@@ -10,7 +10,7 @@ before_install: gem update --system 1.8.25
 
 install: bundle install
 
-script: bundle exec rake test
+script: bundle exec rake test:syntax test:lint test:spec
 
 branches:
   only:

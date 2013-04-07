@@ -67,12 +67,14 @@ The cookbook provides a couple of helpful [Rake](http://rake.rubyforge.org)
 tasks (specified in `Rakefile`):
 
     $ rake -T
-    rake clean        # Remove any temporary products.
-    rake clobber      # Remove any generated file.
-    rake test:all     # Run test:syntax, test:lint, and test:spec together
-    rake test:lint    # Run Foodcritic lint checks
-    rake test:spec    # Run ChefSpec examples
-    rake test:syntax  # Run Knife syntax checks
+    rake clean                      # Remove any temporary products.
+    rake clobber                    # Remove any generated file.
+    rake test:all                   # Run test:syntax, test:lint, test:spec, and test:integration
+    rake test:integration           # Run minitest integration tests with Vagrant
+    rake test:integration_teardown  # Tear down VM used for integration tests
+    rake test:lint                  # Run Foodcritic lint checks
+    rake test:spec                  # Run ChefSpec examples
+    rake test:syntax                # Run Knife syntax checks
 
 As mentioned above, use `bundle exec` to start a Rake task:
 
@@ -100,6 +102,26 @@ examples in the `spec` directory. Built on top of RSpec, ChefSpec allows you to
 write unit tests for Chef cookbooks. It runs your cookbook - without actually
 converging a node - and lets you make assertions about the resources that were
 created. This makes it the ideal tool to get fast feedback on cookbook changes.
+
+## Minitest
+
+The Rake task `test:integration` will run minitest integration tests inside a VM
+managed by Vagrant. This is done by adding the [minitest-handler cookbook] to
+Chef's run list prior to provisioning the VM. This cookbook will install
+[minitest-chef-handler] inside the VM, which in turn runs all
+`files/**/*_test.rb` files at the end of the provisioning process.
+
+In case the VM is powered off, `rake test:integration` will boot it up first.
+When you no longer need the VM for integration testing, `rake
+test:integration_teardown` will shut it down. If you rather want to provision
+from scratch, set `INTEGRATION_TEARDOWN` accordingly. For example:
+
+    $ export INTEGRATION_TEARDOWN='vagrant destroy -f'
+    $ rake test:integration_teardown
+    $ rake test:integration
+
+[minitest-chef-handler]: https://github.com/calavera/minitest-chef-handler
+[minitest-handler cookbook]: https://github.com/btm/minitest-handler-cookbook
 
 ## Berkshelf
 
