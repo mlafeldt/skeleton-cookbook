@@ -43,7 +43,7 @@ CLOBBER.include COOKBOOKS_PATH, 'Berksfile.lock'
 namespace :test do
   task :prepare do
     sh 'berks', 'install', '--path', COOKBOOKS_PATH
-    # run :cleanup at exit unless an exception was raised
+    # Run cleanup at exit unless an exception was raised.
     at_exit { Rake::Task['test:cleanup'].invoke if $!.nil? }
   end
 
@@ -71,11 +71,26 @@ namespace :test do
   end
   task :spec => :prepare
 
-  desc 'Run test:syntax, test:lint, and test:spec together'
-  task :all => [:syntax, :lint, :spec]
+  desc 'Run minitest integration tests with Vagrant'
+  task :integration do
+    # This variable is evaluated by Berksfile and Vagrantfile, and will add
+    # minitest-handler to Chef's run list.
+    ENV['INTEGRATION_TEST'] = '1'
+    # Bring up or provision VM depending on its state.
+    sh 'vagrant', `vagrant status` =~ /The VM is running/ ? 'provision' : 'up'
+  end
+
+  desc 'Tear down VM used for integration tests'
+  task :integration_teardown do
+    # Shut VM down unless INTEGRATION_TEARDOWN is set to a different command.
+    sh ENV.fetch('INTEGRATION_TEARDOWN', 'vagrant halt --force')
+  end
+
+  desc 'Run test:syntax, test:lint, test:spec, and test:integration'
+  task :all => [:syntax, :lint, :spec, :integration, :integration_teardown]
 end
 
-# aliases for backwards compatibility and convenience
+# Aliases for backwards compatibility and convenience
 task :test => 'test:all'
 task :spec => 'test:spec'
 
