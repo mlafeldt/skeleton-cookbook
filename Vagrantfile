@@ -10,7 +10,11 @@ Vagrant::Config.run do |config|
     chef.add_recipe 'apt'
     chef.add_recipe 'skeleton'
 
-    chef.json = {}
+    chef.json = {
+      # Only run integration tests for this cookbook
+      "minitest" => { "tests" => "skeleton/*_test.rb" }
+    }
+
     chef.log_level = :debug
   end
 end
