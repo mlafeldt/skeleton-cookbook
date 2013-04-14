@@ -38,7 +38,7 @@ end
 COOKBOOK_NAME = ENV['COOKBOOK_NAME'] || cookbook_name
 FIXTURES_PATH = ENV['FIXTURES_PATH'] || 'fixtures'
 
-CLOBBER.include FIXTURES_PATH, 'Berksfile.lock'
+CLOBBER.include FIXTURES_PATH, 'Berksfile.lock', '.vagrant'
 
 namespace :test do
   task :prepare do
