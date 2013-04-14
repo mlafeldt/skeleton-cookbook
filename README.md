@@ -133,7 +133,7 @@ dependencies in `metadata.rb`. It is good practice to specify the cookbook
 sources in `Berksfile`, while keeping the cookbook versions in `metadata.rb`
 (the authoritative source of information for Chef).
 
-During testing, dependencies are installed to the `cookbooks` directory inside
+During testing, dependencies are installed to the `fixtures` directory inside
 this cookbook.
 
 ## Vagrant

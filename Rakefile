@@ -36,37 +36,37 @@ def cookbook_name
 end
 
 COOKBOOK_NAME = ENV['COOKBOOK_NAME'] || cookbook_name
-COOKBOOKS_PATH = ENV['COOKBOOKS_PATH'] || 'cookbooks'
+FIXTURES_PATH = ENV['FIXTURES_PATH'] || 'fixtures'
 
-CLOBBER.include COOKBOOKS_PATH, 'Berksfile.lock'
+CLOBBER.include FIXTURES_PATH, 'Berksfile.lock'
 
 namespace :test do
   task :prepare do
-    sh 'berks', 'install', '--path', COOKBOOKS_PATH
+    sh 'berks', 'install', '--path', FIXTURES_PATH
     # Run cleanup at exit unless an exception was raised.
     at_exit { Rake::Task['test:cleanup'].invoke if $!.nil? }
   end
 
   task :cleanup do
-    rm_rf COOKBOOKS_PATH
+    rm_rf FIXTURES_PATH
   end
 
   desc 'Run Knife syntax checks'
   task :syntax => :prepare do
     sh 'knife', 'cookbook', 'test', COOKBOOK_NAME, '--config', '.knife.rb',
-       '--cookbook-path', COOKBOOKS_PATH
+       '--cookbook-path', FIXTURES_PATH
   end
 
   desc 'Run Foodcritic lint checks'
   task :lint => :prepare do
     # TODO: FoodCritic::Rake::LintTask is still experimental
     sh 'foodcritic', '--epic-fail', 'any',
-       File.join(COOKBOOKS_PATH, COOKBOOK_NAME)
+       File.join(FIXTURES_PATH, COOKBOOK_NAME)
   end
 
   desc 'Run ChefSpec examples'
   RSpec::Core::RakeTask.new(:spec) do |t|
-    t.pattern = File.join(COOKBOOKS_PATH, COOKBOOK_NAME, 'spec', '*_spec.rb')
+    t.pattern = File.join(FIXTURES_PATH, COOKBOOK_NAME, 'spec', '*_spec.rb')
     t.rspec_opts = '--color --format documentation'
   end
   task :spec => :prepare
