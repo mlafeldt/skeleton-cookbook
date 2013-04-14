@@ -76,8 +76,13 @@ namespace :test do
     # This variable is evaluated by Berksfile and Vagrantfile, and will add
     # minitest-handler to Chef's run list.
     ENV['INTEGRATION_TEST'] = '1'
-    # Bring up or provision VM depending on its state.
-    sh 'vagrant', `vagrant status` =~ /The VM is running/ ? 'provision' : 'up'
+
+    # Provision VM depending on its state.
+    case `vagrant status`
+    when /The VM is running/ then ['provision']
+    when /To resume this VM/ then ['up', 'provision']
+    else ['up']
+    end.each { |cmd| sh 'vagrant', cmd }
   end
 
   desc 'Tear down VM used for integration tests'
