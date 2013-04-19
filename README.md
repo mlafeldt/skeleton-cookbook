@@ -75,6 +75,7 @@ tasks (specified in `Rakefile`):
     rake test:lint                  # Run Foodcritic lint checks
     rake test:spec                  # Run ChefSpec examples
     rake test:syntax                # Run Knife syntax checks
+    rake test:travis                # Run test:syntax, test:lint, and test:spec
 
 As mentioned above, use `bundle exec` to start a Rake task:
 
