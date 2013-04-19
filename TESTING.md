@@ -8,9 +8,9 @@ of the testing can be done through convenient Rake tasks.
 ## Bundler
 
 Apart from Vagrant, which is described later on, all tools you need for cookbook
-development and testing are installed as Ruby gems using [Bundler](http://gembundler.com).
-This gives you a lot of control over the software stack ensuring that the
-testing environment matches your production environment.
+development and testing are installed as Ruby gems using [Bundler]. This gives
+you a lot of control over the software stack ensuring that the testing
+environment matches your production environment.
 
 First, make sure you have Bundler (which is itself a gem):
 
@@ -28,8 +28,8 @@ Now you can use `bundle exec` to execute a command from the gemset, for example:
 
 ## Rake
 
-The cookbook provides a couple of helpful [Rake](http://rake.rubyforge.org)
-tasks (specified in `Rakefile`):
+The cookbook provides a couple of helpful [Rake] tasks (specified in
+`Rakefile`):
 
     $ rake -T
     rake clean                      # Remove any temporary products.
@@ -57,17 +57,17 @@ on the cookbook, validating both Ruby files and templates.
 
 ## Foodcritic
 
-The Rake task `test:lint` will use [Foodcritic](http://acrmp.github.com/foodcritic/)
-to run lint checks on the cookbook. Foodcritic is configured to fail if there
-are _any_ warnings that might stop the cookbook from working.
+The Rake task `test:lint` will use [Foodcritic] to run lint checks on the
+cookbook. Foodcritic is configured to fail if there are _any_ warnings that
+might stop the cookbook from working.
 
 ## ChefSpec
 
-The Rake task `test:spec` will run all [ChefSpec](https://github.com/acrmp/chefspec)
-examples in the `spec` directory. Built on top of RSpec, ChefSpec allows you to
-write unit tests for Chef cookbooks. It runs your cookbook - without actually
-converging a node - and lets you make assertions about the resources that were
-created. This makes it the ideal tool to get fast feedback on cookbook changes.
+The Rake task `test:spec` will run all [ChefSpec] examples in the `spec`
+directory. Built on top of RSpec, ChefSpec allows you to write unit tests for
+Chef cookbooks. It runs your cookbook - without actually converging a node - and
+lets you make assertions about the resources that were created. This makes it
+the ideal tool to get fast feedback on cookbook changes.
 
 ## Minitest
 
@@ -86,13 +86,10 @@ from scratch, set `INTEGRATION_TEARDOWN` accordingly. For example:
     $ rake test:integration_teardown
     $ rake test:integration
 
-[minitest-chef-handler]: https://github.com/calavera/minitest-chef-handler
-[minitest-handler cookbook]: https://github.com/btm/minitest-handler-cookbook
-
 ## Berkshelf
 
-[Berkshelf](http://berkshelf.com) is used to set up the cookbook and its
-dependencies prior to testing with Rake and Vagrant.
+[Berkshelf] is used to set up the cookbook and its dependencies prior to testing
+with Rake and Vagrant.
 
 The dependencies are defined in `Berksfile`, which in turn resolves the
 dependencies in `metadata.rb`. It is good practice to specify the cookbook
@@ -104,11 +101,11 @@ this cookbook.
 
 ## Vagrant
 
-With [Vagrant](http://vagrantup.com), you can spin up a virtual machine and run
-your cookbook inside it via Chef Solo or Chef Client. The test setup requires to
-install **Vagrant 1.2.x** from the [Vagrant downloads page](http://downloads.vagrantup.com/).
+With [Vagrant], you can spin up a virtual machine and run your cookbook inside
+it via Chef Solo or Chef Client. The test setup requires to install **Vagrant
+1.2.x** from the [Vagrant downloads page].
 
-You will also need the Berkshelf Vagrant plugin, which will make your cookbook
+You will also need the [vagrant-berkshelf] plugin, which will make your cookbook
 and its dependencies automatically available to Vagrant when creating or
 provisioning a VM:
 
@@ -125,9 +122,22 @@ In case the VM is already up, you can run the provisioners again with:
 
 ## Travis CI
 
-The cookbook includes a configuration for [Travis CI](https://travis-ci.org)
-that will run `rake test` each time changes are pushed to GitHub. Simply enable
-Travis for your GitHub repository to get free continuous integration.
+The cookbook includes a configuration for [Travis CI] that will run `rake test`
+each time changes are pushed to GitHub. Simply enable Travis for your GitHub
+repository to get free continuous integration.
 
 Implementing CI with other systems should be as simple as running the commands
 in `.travis.yml`.
+
+
+[Berkshelf]: http://berkshelf.com
+[Bundler]: http://gembundler.com
+[ChefSpec]: https://github.com/acrmp/chefspec
+[Foodcritic]: http://acrmp.github.com/foodcritic/
+[Rake]: http://rake.rubyforge.org
+[Travis CI]: https://travis-ci.org
+[Vagrant downloads page]: http://downloads.vagrantup.com/
+[Vagrant]: http://vagrantup.com
+[minitest-chef-handler]: https://github.com/calavera/minitest-chef-handler
+[minitest-handler cookbook]: https://github.com/btm/minitest-handler-cookbook
+[vagrant-berkshelf]: https://github.com/RiotGames/vagrant-berkshelf
