@@ -1,9 +1,12 @@
 Testing
 =======
 
-The cookbook comes with some testing facilities allowing you to iterate quickly
-on cookbook changes. After installing Vagrant and the required Ruby gems, most
-of the testing can be done through convenient Rake tasks.
+This cookbook comes with everything you need to develop infrastructure code with
+Chef and feel confident about it. The provided testing facilities allow you to
+iterate quickly on cookbook changes.
+
+After installing Vagrant and the required Ruby gems, most of the testing can be
+done through convenient Rake tasks.
 
 ## Bundler
 
