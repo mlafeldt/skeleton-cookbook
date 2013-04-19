@@ -140,13 +140,13 @@ this cookbook.
 
 With [Vagrant](http://vagrantup.com), you can spin up a virtual machine and run
 your cookbook inside it via Chef Solo or Chef Client. The test setup requires to
-install **Vagrant 1.1.x** from the [Vagrant downloads page](http://downloads.vagrantup.com/).
+install **Vagrant 1.2.x** from the [Vagrant downloads page](http://downloads.vagrantup.com/).
 
 You will also need the Berkshelf Vagrant plugin, which will make your cookbook
 and its dependencies automatically available to Vagrant when creating or
 provisioning a VM:
 
-    $ vagrant plugin install berkshelf-vagrant
+    $ vagrant plugin install vagrant-berkshelf
 
 When everything is in place, this command will boot and provision the VM as
 specified in the `Vagrantfile`:
