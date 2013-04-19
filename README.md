@@ -30,7 +30,7 @@ Recipes
 
 ## skeleton::default
 
-Installs/configures something
+*Explain what the recipe does here*
 
 Testing
 =======
