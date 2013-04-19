@@ -91,6 +91,9 @@ namespace :test do
     sh ENV.fetch('INTEGRATION_TEARDOWN', 'vagrant halt --force')
   end
 
+  desc 'Run test:syntax, test:lint, and test:spec'
+  task :travis => [:syntax, :lint, :spec]
+
   desc 'Run test:syntax, test:lint, test:spec, and test:integration'
   task :all => [:syntax, :lint, :spec, :integration, :integration_teardown]
 end
