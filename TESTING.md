@@ -122,9 +122,9 @@ In case the VM is already up, you can run the provisioners again with:
 
 ## Travis CI
 
-The cookbook includes a configuration for [Travis CI] that will run `rake test`
-each time changes are pushed to GitHub. Simply enable Travis for your GitHub
-repository to get free continuous integration.
+The cookbook includes a configuration for [Travis CI] that will run `rake
+test:travis` each time changes are pushed to GitHub. Simply enable Travis for
+your GitHub repository to get free continuous integration.
 
 Implementing CI with other systems should be as simple as running the commands
 in `.travis.yml`.
