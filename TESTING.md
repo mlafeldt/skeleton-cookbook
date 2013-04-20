@@ -37,6 +37,7 @@ The cookbook provides a couple of helpful [Rake] tasks (specified in
     $ rake -T
     rake clean                      # Remove any temporary products.
     rake clobber                    # Remove any generated file.
+    rake env                        # Display information about the environment
     rake test:all                   # Run test:syntax, test:lint, test:spec, and test:integration
     rake test:integration           # Run minitest integration tests with Vagrant
     rake test:integration_teardown  # Tear down VM used for integration tests
