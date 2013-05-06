@@ -1,9 +1,9 @@
 # vi: set ft=ruby :
 
 Vagrant.configure('2') do |config|
-  config.vm.box = 'precise64'
-  config.vm.box_url = 'http://files.vagrantup.com/precise64.box'
-  config.vm.hostname = 'skeleton-ubuntu'
+  config.vm.box = 'jimdo-debian-7.0.0'
+  config.vm.box_url = 'https://jimdo-vagrant-boxes.s3.amazonaws.com/jimdo-debian-7.0.0.box'
+  config.vm.hostname = 'skeleton-debian'
 
   # Enable Berkshelf plugin which will make cookbooks available to Vagrant
   config.berkshelf.enabled = true
