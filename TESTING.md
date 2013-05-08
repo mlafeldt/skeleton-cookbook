@@ -1,5 +1,5 @@
 Testing
-=======
+-------
 
 This cookbook comes with everything you need to develop infrastructure code with
 Chef and feel confident about it. The provided testing facilities allow you to
@@ -8,7 +8,7 @@ iterate quickly on cookbook changes.
 After installing Vagrant and the required Ruby gems, most of the testing can be
 done through convenient Rake tasks.
 
-## Bundler
+### Bundler
 
 Apart from Vagrant, which is described later on, all tools you need for cookbook
 development and testing are installed as Ruby gems using [Bundler]. This gives
@@ -29,7 +29,7 @@ Now you can use `bundle exec` to execute a command from the gemset, for example:
 
 (You should keep `Gemfile.lock` checked in.)
 
-## Rake
+### Rake
 
 The cookbook provides a couple of helpful [Rake] tasks (specified in
 `Rakefile`):
@@ -53,18 +53,18 @@ The `test` task is an alias for `test:all` and also happens to be the default
 when no task is given. All test-related tasks are described in more detail
 below.
 
-## Knife
+### Knife
 
 The Rake task `test:syntax` will use `knife cookbook test` to run syntax checks
 on the cookbook, validating both Ruby files and templates.
 
-## Foodcritic
+### Foodcritic
 
 The Rake task `test:lint` will use [Foodcritic] to run lint checks on the
 cookbook. Foodcritic is configured to fail if there are _any_ warnings that
 might stop the cookbook from working.
 
-## ChefSpec
+### ChefSpec
 
 The Rake task `test:spec` will run all [ChefSpec] examples in the `spec`
 directory. Built on top of RSpec, ChefSpec allows you to write unit tests for
@@ -72,7 +72,7 @@ Chef cookbooks. It runs your cookbook - without actually converging a node - and
 lets you make assertions about the resources that were created. This makes it
 the ideal tool to get fast feedback on cookbook changes.
 
-## Minitest
+### Minitest
 
 The Rake task `test:integration` will run minitest integration tests inside a VM
 managed by Vagrant. This is done by adding the [minitest-handler cookbook] to
@@ -89,7 +89,7 @@ from scratch, set `INTEGRATION_TEARDOWN` accordingly. For example:
     $ rake test:integration_teardown
     $ rake test:integration
 
-## Berkshelf
+### Berkshelf
 
 [Berkshelf] is used to set up the cookbook and its dependencies prior to testing
 with Rake and Vagrant.
@@ -102,7 +102,7 @@ sources in `Berksfile`, while keeping the cookbook versions in `metadata.rb`
 During testing, dependencies are installed to the `fixtures` directory inside
 this cookbook.
 
-## Vagrant
+### Vagrant
 
 With [Vagrant], you can spin up a virtual machine and run your cookbook inside
 it via Chef Solo or Chef Client. The test setup requires to install **Vagrant
@@ -123,7 +123,7 @@ In case the VM is already up, you can run the provisioners again with:
 
     $ vagrant provision
 
-## Travis CI
+### Travis CI
 
 The cookbook includes a configuration for [Travis CI] that will run `rake
 test:travis` each time changes are pushed to GitHub. Simply enable Travis for
