@@ -1,5 +1,5 @@
-Description
-===========
+Skeleton Cookbook
+=================
 
 This is a testable skeleton cookbook designed for you or your organization to
 fork and modify appropriately. The cookbook comes with everything you need to
@@ -10,30 +10,30 @@ develop infrastructure code with Chef and feel confident about it. See file
 needs, I recommend keeping the `TESTING.md` file as-is.)
 
 Requirements
-============
+------------
 
-## Platform:
+### Platform:
 
 *List supported platforms here*
 
-## Cookbooks:
+### Cookbooks:
 
 *List cookbook dependencies here*
 
 Attributes
-==========
+----------
 
 *List attributes here*
 
 Recipes
-=======
+-------
 
-## skeleton::default
+### skeleton::default
 
 *Explain what the recipe does here*
 
 Testing
-=======
+-------
 
 Everything you need to know about testing this cookbook is explained in
 `TESTING.md`.
@@ -41,7 +41,7 @@ Everything you need to know about testing this cookbook is explained in
 [![Build Status](https://travis-ci.org/mlafeldt/skeleton-cookbook.png?branch=master)](https://travis-ci.org/mlafeldt/skeleton-cookbook)
 
 License and Author
-==================
+------------------
 
 Author:: Mathias Lafeldt (<mathias.lafeldt@gmail.com>)
 
