@@ -40,6 +40,25 @@ FIXTURES_PATH = ENV['FIXTURES_PATH'] || 'fixtures'
 
 CLOBBER.include FIXTURES_PATH, 'Berksfile.lock', '.vagrant'
 
+desc 'Display information about the environment'
+task :env do
+  {
+    :ruby              => 'ruby --version',
+    :rubygems          => 'gem --version',
+    :bundler           => 'bundle --version',
+    :vagrant           => 'vagrant --version',
+    :vagrant_berkshelf => 'vagrant plugin list 2>/dev/null | grep berkshelf',
+    :virtualbox        => 'VBoxManage --version'
+  }.each do |key, cmd|
+    begin
+      result = `#{cmd}`.chomp
+    rescue Errno::ENOENT
+      result = 'not found'
+    end
+    puts "  * #{key}: #{result}"
+  end
+end
+
 namespace :test do
   task :prepare do
     sh 'berks', 'install', '--path', FIXTURES_PATH
