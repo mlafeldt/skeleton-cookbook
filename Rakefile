@@ -35,8 +35,8 @@ def cookbook_name
   end
 end
 
-COOKBOOK_NAME = ENV['COOKBOOK_NAME'] || cookbook_name
-FIXTURES_PATH = ENV['FIXTURES_PATH'] || 'fixtures'
+COOKBOOK_NAME = ENV.fetch('COOKBOOK_NAME', cookbook_name)
+FIXTURES_PATH = ENV.fetch('FIXTURES_PATH', 'fixtures')
 
 CLOBBER.include FIXTURES_PATH, 'Berksfile.lock', '.vagrant'
 
@@ -90,24 +90,17 @@ namespace :test do
   end
   task :spec => :prepare
 
-  desc 'Run minitest integration tests with Vagrant'
-  task :integration do
-    # This variable is evaluated by Berksfile and Vagrantfile, and will add
-    # minitest-handler to Chef's run list.
-    ENV['INTEGRATION_TEST'] = '1'
-
-    # Provision VM depending on its state.
-    case `vagrant status`
-    when /The VM is running/ then ['provision']
-    when /To resume this VM/ then ['up', 'provision']
-    else ['up']
-    end.each { |cmd| sh 'vagrant', cmd }
+  desc 'Run serverspec integration tests with Vagrant'
+  RSpec::Core::RakeTask.new(:integration) do |t|
+    t.pattern = 'spec/integration/**/*_spec.rb'
+    t.rspec_opts = '--color --format documentation'
   end
+  task :integration => 'vagrant:provision'
 
   desc 'Tear down VM used for integration tests'
   task :integration_teardown do
-    # Shut VM down unless INTEGRATION_TEARDOWN is set to a different command.
-    sh ENV.fetch('INTEGRATION_TEARDOWN', 'vagrant halt --force')
+    # Shut VM down unless INTEGRATION_TEARDOWN is set to a different task.
+    Rake::Task[ENV.fetch('INTEGRATION_TEARDOWN', 'vagrant:halt')].invoke
   end
 
   desc 'Run test:syntax, test:lint, and test:spec'
@@ -117,8 +110,37 @@ namespace :test do
   task :all => [:syntax, :lint, :spec, :integration, :integration_teardown]
 end
 
+namespace :vagrant do
+  desc 'Provision the VM using Chef'
+  task :provision do
+    # Provision VM depending on its state.
+    case `vagrant status`
+    when /The VM is running/ then ['provision']
+    when /To resume this VM/ then ['up', 'provision']
+    else ['up']
+    end.each { |cmd| sh 'vagrant', cmd }
+  end
+
+  desc 'SSH into the VM'
+  task :ssh do
+    sh 'vagrant', 'ssh'
+  end
+
+  desc 'Shutdown the VM'
+  task :halt do
+    sh 'vagrant', 'halt', '--force'
+  end
+
+  desc 'Destroy the VM'
+  task :destroy do
+    sh 'vagrant', 'destroy', '--force'
+    Rake::Task['test:cleanup'].invoke
+  end
+end
+
 # Aliases for backwards compatibility and convenience
-task :test => 'test:all'
+task :lint => 'test:lint'
 task :spec => 'test:spec'
+task :test => 'test:all'
 
 task :default => :test
