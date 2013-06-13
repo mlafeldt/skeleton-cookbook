@@ -1,4 +1,4 @@
-require 'chefspec'
+require 'spec_helper'
 
 describe 'The recipe skeleton::default' do
   let (:chef_run) do
@@ -7,11 +7,11 @@ describe 'The recipe skeleton::default' do
     chef_run
   end
 
-  it 'converges' do
-    expect(chef_run).to be
+  it 'installs sample package' do
+    expect(chef_run).to install_package 'tree'
   end
 
   it 'does something' do
-    pending 'Add recipe examples here'
+    pending 'Replace this with meaningful tests'
   end
 end
