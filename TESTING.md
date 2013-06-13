@@ -39,12 +39,16 @@ The cookbook provides a couple of helpful [Rake] tasks (specified in
     rake clobber                    # Remove any generated file.
     rake env                        # Display information about the environment
     rake test:all                   # Run test:syntax, test:lint, test:spec, and test:integration
-    rake test:integration           # Run minitest integration tests with Vagrant
+    rake test:integration           # Run serverspec integration tests with Vagrant
     rake test:integration_teardown  # Tear down VM used for integration tests
     rake test:lint                  # Run Foodcritic lint checks
     rake test:spec                  # Run ChefSpec examples
     rake test:syntax                # Run Knife syntax checks
     rake test:travis                # Run test:syntax, test:lint, and test:spec
+    rake vagrant:destroy            # Destroy the VM
+    rake vagrant:halt               # Shutdown the VM
+    rake vagrant:provision          # Provision the VM using Chef
+    rake vagrant:ssh                # SSH into the VM
 
 As mentioned above, use `bundle exec` to start a Rake task:
 
@@ -73,20 +77,20 @@ Chef cookbooks. It runs your cookbook - without actually converging a node - and
 lets you make assertions about the resources that were created. This makes it
 the ideal tool to get fast feedback on cookbook changes.
 
-### Minitest
+### serverspec
 
-The Rake task `test:integration` will run minitest integration tests inside a VM
-managed by Vagrant. This is done by adding the [minitest-handler cookbook] to
-Chef's run list prior to provisioning the VM. This cookbook will install
-[minitest-chef-handler] inside the VM, which in turn runs all
-`files/**/*_test.rb` files at the end of the provisioning process.
+The Rake task `test:integration` will run [serverspec] integration tests
+against a VM managed by Vagrant. The files `spec/integration/**/*_spec.rb` are
+the test files that are run at the end of the provisioning process by ssh'ing
+into the VM. For each VM you want to test, there must be a folder with specs in
+`spec/integration/` (the default node specs are in `spec/integration/default`).
 
 In case the VM is powered off, `rake test:integration` will boot it up first.
 When you no longer need the VM for integration testing, `rake
 test:integration_teardown` will shut it down. If you rather want to provision
 from scratch, set `INTEGRATION_TEARDOWN` accordingly. For example:
 
-    $ export INTEGRATION_TEARDOWN='vagrant destroy -f'
+    $ export INTEGRATION_TEARDOWN='vagrant:destroy'
     $ rake test:integration_teardown
     $ rake test:integration
 
@@ -142,6 +146,5 @@ in `.travis.yml`.
 [Travis CI]: https://travis-ci.org
 [Vagrant downloads page]: http://downloads.vagrantup.com/
 [Vagrant]: http://vagrantup.com
-[minitest-chef-handler]: https://github.com/calavera/minitest-chef-handler
-[minitest-handler cookbook]: https://github.com/btm/minitest-handler-cookbook
+[serverspec]: http://serverspec.org/
 [vagrant-berkshelf]: https://github.com/RiotGames/vagrant-berkshelf
