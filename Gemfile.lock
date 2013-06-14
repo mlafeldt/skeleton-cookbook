@@ -176,6 +176,10 @@ GEM
       nokogiri (>= 1.4.0)
       nori (~> 1.0)
       wasabi (~> 1.0)
+    serverspec (0.6.2)
+      highline
+      net-ssh
+      rspec (~> 2.0)
     slop (3.4.5)
     solve (0.5.0)
     systemu (2.5.2)
@@ -214,3 +218,4 @@ DEPENDENCIES
   chefspec
   foodcritic
   rake
+  serverspec
