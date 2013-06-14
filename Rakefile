@@ -84,11 +84,11 @@ namespace :test do
   end
 
   desc 'Run ChefSpec examples'
-  RSpec::Core::RakeTask.new(:spec) do |t|
+  RSpec::Core::RakeTask.new(:unit) do |t|
     t.pattern = File.join(FIXTURES_PATH, COOKBOOK_NAME, 'spec', 'unit', '*_spec.rb')
     t.rspec_opts = '--color --format documentation'
   end
-  task :spec => :prepare
+  task :unit => :prepare
 
   desc 'Run serverspec integration tests with Vagrant'
   RSpec::Core::RakeTask.new(:integration) do |t|
@@ -103,11 +103,11 @@ namespace :test do
     Rake::Task[ENV.fetch('INTEGRATION_TEARDOWN', 'vagrant:halt')].invoke
   end
 
-  desc 'Run test:syntax, test:lint, and test:spec'
-  task :travis => [:syntax, :lint, :spec]
+  desc 'Run test:syntax, test:lint, and test:unit'
+  task :travis => [:syntax, :lint, :unit]
 
-  desc 'Run test:syntax, test:lint, test:spec, and test:integration'
-  task :all => [:syntax, :lint, :spec, :integration, :integration_teardown]
+  desc 'Run test:syntax, test:lint, test:unit, and test:integration'
+  task :all => [:syntax, :lint, :unit, :integration, :integration_teardown]
 end
 
 namespace :vagrant do
@@ -140,7 +140,7 @@ end
 
 # Aliases for backwards compatibility and convenience
 task :lint => 'test:lint'
-task :spec => 'test:spec'
+task :spec => 'test:unit'
 task :test => 'test:all'
 
 task :default => :test

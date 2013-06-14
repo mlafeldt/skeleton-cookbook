@@ -38,13 +38,13 @@ The cookbook provides a couple of helpful [Rake] tasks (specified in
     rake clean                      # Remove any temporary products.
     rake clobber                    # Remove any generated file.
     rake env                        # Display information about the environment
-    rake test:all                   # Run test:syntax, test:lint, test:spec, and test:integration
+    rake test:all                   # Run test:syntax, test:lint, test:unit, and test:integration
     rake test:integration           # Run serverspec integration tests with Vagrant
     rake test:integration_teardown  # Tear down VM used for integration tests
     rake test:lint                  # Run Foodcritic lint checks
-    rake test:spec                  # Run ChefSpec examples
     rake test:syntax                # Run Knife syntax checks
-    rake test:travis                # Run test:syntax, test:lint, and test:spec
+    rake test:travis                # Run test:syntax, test:lint, and test:unit
+    rake test:unit                  # Run ChefSpec examples
     rake vagrant:destroy            # Destroy the VM
     rake vagrant:halt               # Shutdown the VM
     rake vagrant:provision          # Provision the VM using Chef
