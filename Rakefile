@@ -38,7 +38,7 @@ end
 COOKBOOK_NAME = ENV.fetch('COOKBOOK_NAME', cookbook_name)
 FIXTURES_PATH = ENV.fetch('FIXTURES_PATH', 'vendor/cookbooks')
 
-CLOBBER.include FIXTURES_PATH, 'Berksfile.lock', '.vagrant'
+CLOBBER.include FIXTURES_PATH, 'Berksfile.lock', '.kitchen', '.vagrant'
 
 desc 'Display information about the environment'
 task :env do
