@@ -36,7 +36,7 @@ def cookbook_name
 end
 
 COOKBOOK_NAME = ENV.fetch('COOKBOOK_NAME', cookbook_name)
-FIXTURES_PATH = ENV.fetch('FIXTURES_PATH', 'fixtures')
+FIXTURES_PATH = ENV.fetch('FIXTURES_PATH', 'vendor/cookbooks')
 
 CLOBBER.include FIXTURES_PATH, 'Berksfile.lock', '.vagrant'
 
@@ -85,7 +85,7 @@ namespace :test do
 
   desc 'Run ChefSpec examples'
   RSpec::Core::RakeTask.new(:spec) do |t|
-    t.pattern = File.join(FIXTURES_PATH, COOKBOOK_NAME, 'spec', '*_spec.rb')
+    t.pattern = File.join(FIXTURES_PATH, COOKBOOK_NAME, 'spec', 'unit', '*_spec.rb')
     t.rspec_opts = '--color --format documentation'
   end
   task :spec => :prepare
