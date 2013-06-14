@@ -2,7 +2,7 @@ require 'chefspec'
 
 describe 'The recipe skeleton::default' do
   let (:chef_run) do
-    chef_run = ChefSpec::ChefRunner.new(:platform => 'debian')
+    chef_run = ChefSpec::ChefRunner.new(:platform => 'debian', :version => '7.0')
     chef_run.converge 'skeleton::default'
     chef_run
   end
