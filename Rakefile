@@ -85,7 +85,7 @@ namespace :test do
 
   desc 'Run ChefSpec examples'
   RSpec::Core::RakeTask.new(:unit) do |t|
-    t.pattern = File.join(FIXTURES_PATH, COOKBOOK_NAME, 'spec', 'unit', '*_spec.rb')
+    t.pattern = 'spec/unit/*_spec.rb'
     t.rspec_opts = '--color --format documentation'
   end
   task :unit => :prepare
