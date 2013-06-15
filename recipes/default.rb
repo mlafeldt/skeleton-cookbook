@@ -18,3 +18,7 @@
 #
 
 # Install/configure something here
+# Replace this with meaningful resources
+package 'tree' do
+  action :install
+end

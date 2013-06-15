@@ -35,10 +35,10 @@ def cookbook_name
   end
 end
 
-COOKBOOK_NAME = ENV['COOKBOOK_NAME'] || cookbook_name
-FIXTURES_PATH = ENV['FIXTURES_PATH'] || 'fixtures'
+COOKBOOK_NAME = ENV.fetch('COOKBOOK_NAME', cookbook_name)
+FIXTURES_PATH = ENV.fetch('FIXTURES_PATH', 'vendor/cookbooks')
 
-CLOBBER.include FIXTURES_PATH, 'Berksfile.lock', '.vagrant'
+CLOBBER.include FIXTURES_PATH, 'Berksfile.lock', '.kitchen', '.vagrant'
 
 desc 'Display information about the environment'
 task :env do
@@ -84,18 +84,35 @@ namespace :test do
   end
 
   desc 'Run ChefSpec examples'
-  RSpec::Core::RakeTask.new(:spec) do |t|
-    t.pattern = File.join(FIXTURES_PATH, COOKBOOK_NAME, 'spec', '*_spec.rb')
+  RSpec::Core::RakeTask.new(:unit) do |t|
+    t.pattern = 'spec/unit/*_spec.rb'
     t.rspec_opts = '--color --format documentation'
   end
-  task :spec => :prepare
+  task :unit => :prepare
 
-  desc 'Run minitest integration tests with Vagrant'
-  task :integration do
-    # This variable is evaluated by Berksfile and Vagrantfile, and will add
-    # minitest-handler to Chef's run list.
-    ENV['INTEGRATION_TEST'] = '1'
+  desc 'Run serverspec integration tests with Vagrant'
+  RSpec::Core::RakeTask.new(:integration) do |t|
+    t.pattern = 'spec/integration/**/*_spec.rb'
+    t.rspec_opts = '--color --format documentation'
+  end
+  task :integration => 'vagrant:provision'
 
+  desc 'Tear down VM used for integration tests'
+  task :integration_teardown do
+    # Shut VM down unless INTEGRATION_TEARDOWN is set to a different task.
+    Rake::Task[ENV.fetch('INTEGRATION_TEARDOWN', 'vagrant:halt')].invoke
+  end
+
+  desc 'Run test:syntax, test:lint, and test:unit'
+  task :travis => [:syntax, :lint, :unit]
+
+  desc 'Run test:syntax, test:lint, test:unit, and test:integration'
+  task :all => [:syntax, :lint, :unit, :integration, :integration_teardown]
+end
+
+namespace :vagrant do
+  desc 'Provision the VM using Chef'
+  task :provision do
     # Provision VM depending on its state.
     case `vagrant status`
     when /The VM is running/ then ['provision']
@@ -104,21 +121,26 @@ namespace :test do
     end.each { |cmd| sh 'vagrant', cmd }
   end
 
-  desc 'Tear down VM used for integration tests'
-  task :integration_teardown do
-    # Shut VM down unless INTEGRATION_TEARDOWN is set to a different command.
-    sh ENV.fetch('INTEGRATION_TEARDOWN', 'vagrant halt --force')
+  desc 'SSH into the VM'
+  task :ssh do
+    sh 'vagrant', 'ssh'
   end
 
-  desc 'Run test:syntax, test:lint, and test:spec'
-  task :travis => [:syntax, :lint, :spec]
+  desc 'Shutdown the VM'
+  task :halt do
+    sh 'vagrant', 'halt', '--force'
+  end
 
-  desc 'Run test:syntax, test:lint, test:spec, and test:integration'
-  task :all => [:syntax, :lint, :spec, :integration, :integration_teardown]
+  desc 'Destroy the VM'
+  task :destroy do
+    sh 'vagrant', 'destroy', '--force'
+    Rake::Task['test:cleanup'].invoke
+  end
 end
 
 # Aliases for backwards compatibility and convenience
+task :lint => 'test:lint'
+task :spec => 'test:unit'
 task :test => 'test:all'
-task :spec => 'test:spec'
 
 task :default => :test
