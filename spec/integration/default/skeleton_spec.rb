@@ -1,7 +1,11 @@
 require File.expand_path('../../spec_helper', __FILE__)
 
 describe 'default node' do
-  describe package('tree') do
-    it { should be_installed }
+  it 'installs sample package' do
+    expect(package 'tree').to be_installed
+  end
+
+  it 'does something' do
+    pending 'Replace this with meaningful tests'
   end
 end
