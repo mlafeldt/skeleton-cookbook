@@ -36,9 +36,9 @@ def cookbook_name
 end
 
 COOKBOOK_NAME = ENV.fetch('COOKBOOK_NAME', cookbook_name)
-FIXTURES_PATH = ENV.fetch('FIXTURES_PATH', 'vendor/cookbooks')
+COOKBOOK_PATH = ENV.fetch('COOKBOOK_PATH', 'vendor/cookbooks')
 
-CLOBBER.include FIXTURES_PATH, 'Berksfile.lock', '.kitchen', '.vagrant'
+CLOBBER.include COOKBOOK_PATH, 'Berksfile.lock', '.kitchen', '.vagrant'
 
 desc 'Display information about the environment'
 task :env do
@@ -61,26 +61,27 @@ end
 
 namespace :test do
   task :prepare do
-    sh 'berks', 'install', '--path', FIXTURES_PATH
+    ENV['COOKBOOK_PATH'] = COOKBOOK_PATH
+    sh 'berks', 'install', '--path', COOKBOOK_PATH
     # Run cleanup at exit unless an exception was raised.
     at_exit { Rake::Task['test:cleanup'].invoke if $!.nil? }
   end
 
   task :cleanup do
-    rm_rf FIXTURES_PATH
+    rm_rf COOKBOOK_PATH
   end
 
   desc 'Run Knife syntax checks'
   task :syntax => :prepare do
     sh 'knife', 'cookbook', 'test', COOKBOOK_NAME, '--config', '.knife.rb',
-       '--cookbook-path', FIXTURES_PATH
+       '--cookbook-path', COOKBOOK_PATH
   end
 
   desc 'Run Foodcritic lint checks'
   task :lint => :prepare do
     # TODO: FoodCritic::Rake::LintTask is still experimental
     sh 'foodcritic', '--epic-fail', 'any',
-       File.join(FIXTURES_PATH, COOKBOOK_NAME)
+       File.join(COOKBOOK_PATH, COOKBOOK_NAME)
   end
 
   desc 'Run ChefSpec examples'
