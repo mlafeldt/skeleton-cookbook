@@ -7,13 +7,12 @@ include Serverspec::Helper::DetectOS
 
 SERVERSPEC_CONFIG_ROOT = ENV.fetch('SERVERSPEC_CONFIG_ROOT', '.vagrant/machines')
 
-# Ask Vagrant once for SSH config of host
+# Ask Vagrant for SSH config of host
 def ssh_config_for_host(host)
   config_file = File.join(SERVERSPEC_CONFIG_ROOT, host, 'ssh_config')
-  unless File.file?(config_file) && File.size(config_file) > 0
-    ssh_config = `vagrant ssh-config #{host} --host #{host}`
-    File.open(config_file, 'w') { |file| file.write(ssh_config) }
-  end
+  # TODO: find a way to cache results
+  ssh_config = `vagrant ssh-config #{host} --host #{host}`
+  File.open(config_file, 'w') { |file| file.write(ssh_config) }
   config_file
 end
 
