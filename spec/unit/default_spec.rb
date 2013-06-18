@@ -2,7 +2,13 @@ require File.expand_path('../spec_helper', __FILE__)
 
 describe 'The recipe skeleton::default' do
   let (:chef_run) do
-    chef_run = ChefSpec::ChefRunner.new(:platform => 'debian', :version => '7.0')
+    chef_run = ChefSpec::ChefRunner.new(
+      :platform      => 'debian',
+      :version       => '7.0',
+      :log_level     => :error,
+      :cookbook_path => COOKBOOK_PATH
+    )
+    Chef::Config.force_logger true
     chef_run.converge 'skeleton::default'
     chef_run
   end
