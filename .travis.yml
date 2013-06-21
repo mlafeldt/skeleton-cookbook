@@ -9,7 +9,7 @@ rvm:
 before_install: gem update --system 1.8.25
 
 install:
-  - curl -Ls https://jimdo-travisci.s3.amazonaws.com/skeleton-cookbook/gems.tgz | tar -xzv
+  - curl -Ls https://jimdo-travisci.s3.amazonaws.com/skeleton-cookbook/gems.tar | tar -xv
   - bundle install --local
 
 script: bundle exec rake test:travis
