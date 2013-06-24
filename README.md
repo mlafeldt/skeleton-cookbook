@@ -43,7 +43,7 @@ Everything you need to know about testing this cookbook is explained in
 License and Author
 ------------------
 
-Author:: YOUR_NAME (<YOUR_EMAIL>)
+Author:: YOUR_NAME (YOUR_EMAIL)
 
 Copyright:: YEAR, YOUR_NAME
 
