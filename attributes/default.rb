@@ -2,7 +2,7 @@
 # Cookbook Name:: skeleton
 # Attributes:: default
 #
-# Copyright (C) 2013 Mathias Lafeldt <mathias.lafeldt@gmail.com>
+# Copyright (C) YEAR YOUR_NAME <YOUR_EMAIL>
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.

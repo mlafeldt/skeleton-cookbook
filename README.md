@@ -43,9 +43,9 @@ Everything you need to know about testing this cookbook is explained in
 License and Author
 ------------------
 
-Author:: Mathias Lafeldt (<mathias.lafeldt@gmail.com>)
+Author:: YOUR_NAME (<YOUR_EMAIL>)
 
-Copyright:: 2013, Mathias Lafeldt
+Copyright:: YEAR, YOUR_NAME
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
