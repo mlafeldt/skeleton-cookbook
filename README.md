@@ -3,11 +3,7 @@ Skeleton Cookbook
 
 This is a testable skeleton cookbook designed for you or your organization to
 fork and modify appropriately. The cookbook comes with everything you need to
-develop infrastructure code with Chef and feel confident about it. See file
-`TESTING.md` to learn more.
-
-(While you're encouraged to customize everything in this cookbook to fit your
-needs, I recommend keeping the `TESTING.md` file as-is.)
+develop infrastructure code with Chef and feel confident about it.
 
 Requirements
 ------------
@@ -35,8 +31,8 @@ Recipes
 Testing
 -------
 
-Everything you need to know about testing this cookbook is explained in
-`TESTING.md`.
+This cookbook utilizes [chef-bones] for testing. Everything you need to know
+about testing this cookbook is explained [here][chef-bones-testing].
 
 [![Build Status](https://travis-ci.org/mlafeldt/skeleton-cookbook.png?branch=master)](https://travis-ci.org/mlafeldt/skeleton-cookbook)
 
@@ -67,3 +63,7 @@ Contributing
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
 5. Create new Pull Request
+
+
+[chef-bones]: https://github.com/mlafeldt/chef-bones
+[chef-bones-testing]: https://github.com/mlafeldt/chef-bones/blob/master/TESTING.md
