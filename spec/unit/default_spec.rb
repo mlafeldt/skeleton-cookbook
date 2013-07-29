@@ -1,4 +1,4 @@
-require File.expand_path('../spec_helper', __FILE__)
+require 'chef_bones/unit_spec_helper'
 
 describe 'The recipe skeleton::default' do
   let (:chef_run) do

@@ -1,4 +1,4 @@
-require File.expand_path('../../spec_helper', __FILE__)
+require 'chef_bones/integration_spec_helper'
 
 describe 'default node' do
   it 'installs sample package' do
