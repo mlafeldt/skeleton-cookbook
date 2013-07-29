@@ -4,9 +4,6 @@ rvm:
   - 1.9.3
   - 2.0.0
 
-# Use RubyGems 1.8 since 2.0 doesn't work with Chef
-before_install: gem update --system 1.8.25
-
 install: bundle install
 
 script: bundle exec rake test:travis
