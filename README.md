@@ -31,6 +31,8 @@ Recipes
 Testing
 -------
 
+[![Build Status](https://travis-ci.org/mlafeldt/skeleton-cookbook.png?branch=master)](https://travis-ci.org/mlafeldt/skeleton-cookbook)
+
 The cookbook provides the following Rake tasks for testing:
 
     rake integration                  # Alias for kitchen:all
@@ -39,8 +41,6 @@ The cookbook provides the following Rake tasks for testing:
     rake lint                         # Lint Chef cookbooks
     rake spec                         # Run ChefSpec examples
     rake test                         # Run all tests
-
-[![Build Status](https://travis-ci.org/mlafeldt/skeleton-cookbook.png?branch=master)](https://travis-ci.org/mlafeldt/skeleton-cookbook)
 
 License and Author
 ------------------
