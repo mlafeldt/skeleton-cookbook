@@ -4,9 +4,9 @@ rvm:
   - 1.9.3
   - 2.0.0
 
-install: bundle install
+install: bundle install --without=integration
 
-script: bundle exec rake test:travis
+script: bundle exec rake test
 
 branches:
   only:
