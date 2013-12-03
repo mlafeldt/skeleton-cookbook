@@ -1,10 +1,7 @@
 require "spec_helper"
 
+# Write integration tests with ServerSpec - http://serverspec.org/
 describe "skeleton::default" do
-  it "installs sample package" do
-    expect(package "tree").to be_installed
-  end
-
   it "does something" do
     pending "Replace this with meaningful tests"
   end
