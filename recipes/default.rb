@@ -18,4 +18,3 @@
 #
 
 # Install/configure something here
-# Replace this with meaningful resources
