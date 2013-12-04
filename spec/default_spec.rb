@@ -1,6 +1,6 @@
 require "spec_helper"
 
-# Write unit tests with ChefSpec - http://sethvargo.com/chefspec/
+# Write unit tests with ChefSpec - https://github.com/sethvargo/chefspec#readme
 describe "skeleton::default" do
   let (:chef_run) { ChefSpec::Runner.new.converge(described_recipe) }
 
