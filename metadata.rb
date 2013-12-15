@@ -1,3 +1,4 @@
+# encoding: utf-8
 name             'skeleton'
 maintainer       'YOUR NAME'
 maintainer_email 'YOUR EMAIL'

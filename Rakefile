@@ -1,3 +1,4 @@
+# encoding: utf-8
 require "foodcritic"
 require "rspec/core/rake_task"
 
@@ -15,7 +16,7 @@ task :default => :test
 
 desc "Run tailor tests"
 task :tailor do
-  sh 'bundle exec tailor *.rb ./**/*.rb ./**/**/**/**/*.rb '
+  sh 'bundle exec tailor *.rb ./**/*.rb ./**/**/**/**/*.rb'
 end
 
 desc "Run taste tests"

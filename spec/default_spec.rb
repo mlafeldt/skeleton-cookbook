@@ -1,3 +1,4 @@
+# encoding: utf-8
 require 'spec_helper'
 
 # Write unit tests with ChefSpec - https://github.com/sethvargo/chefspec#readme
