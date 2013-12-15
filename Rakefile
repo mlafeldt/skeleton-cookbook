@@ -15,7 +15,7 @@ task :default => :test
 
 desc "Run tailor tests"
 task :tailor do
-  sh 'bundle exec tailor'
+  sh 'bundle exec tailor *.rb ./**/*.rb ./**/**/**/**/*.rb '
 end
 
 desc "Run taste tests"
