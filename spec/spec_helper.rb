@@ -1,5 +1,6 @@
-require "chefspec"
-require "chefspec/berkshelf"
+# encoding: utf-8
+require 'chefspec'
+require 'chefspec/berkshelf'
 
 RSpec.configure do |config|
   # Specify the path for Chef Solo to find cookbooks
