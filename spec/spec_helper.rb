@@ -1,5 +1,5 @@
-require "chefspec"
-require "chefspec/berkshelf"
+require 'chefspec'
+require 'chefspec/berkshelf'
 
 RSpec.configure do |config|
   # Specify the path for Chef Solo to find cookbooks
