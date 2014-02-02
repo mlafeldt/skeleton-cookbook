@@ -35,11 +35,12 @@ Testing
 
 The cookbook provides the following Rake tasks for testing:
 
+    rake foodcritic                   # Lint Chef cookbooks
     rake integration                  # Alias for kitchen:all
     rake kitchen:all                  # Run all test instances
     rake kitchen:default-centos-64    # Run default-centos-64 test instance
     rake kitchen:default-ubuntu-1204  # Run default-ubuntu-1204 test instance
-    rake lint                         # Lint Chef cookbooks
+    rake rubocop                      # Run RuboCop style and lint checks
     rake spec                         # Run ChefSpec examples
     rake test                         # Run all tests
 

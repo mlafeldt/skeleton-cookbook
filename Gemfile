@@ -5,6 +5,7 @@ gem "chef",       "~> 11.0"
 gem "chefspec",   "~> 3.0"
 gem "foodcritic", "~> 3.0"
 gem "rake"
+gem "rubocop"
 
 group :integration do
   gem "test-kitchen", "~> 1.0"
