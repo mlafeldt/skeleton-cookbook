@@ -4,6 +4,8 @@ rvm:
   - 1.9.3
   - 2.0.0
 
+before_install: 'echo ''gem: --no-ri --no-rdoc'' > ~/.gemrc'
+
 install: bundle install --without=integration
 
 script: bundle exec rake test
