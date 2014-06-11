@@ -10,5 +10,6 @@ describe "skeleton::default" do
 
   it "does something" do
     pending "Replace this with meaningful tests"
+    fail
   end
 end
