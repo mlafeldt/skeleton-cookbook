@@ -1,7 +1,7 @@
 require "chefspec"
 require "chefspec/berkshelf"
 
-RSpec.configure do |config|
+RSpec.configure do |config| # rubocop:disable UnusedBlockArgument
   # Specify the path for Chef Solo to find cookbooks
   # config.cookbook_path = '/var/cookbooks'
 
