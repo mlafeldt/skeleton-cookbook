@@ -31,7 +31,7 @@ Recipes
 Testing
 -------
 
-[![Build Status](https://travis-ci.org/mlafeldt/skeleton-cookbook.png?branch=master)](https://travis-ci.org/mlafeldt/skeleton-cookbook)
+[![Build Status](https://travis-ci.org/mlafeldt/skeleton-cookbook.svg?branch=master)](https://travis-ci.org/mlafeldt/skeleton-cookbook)
 
 The cookbook provides the following Rake tasks for testing:
 
