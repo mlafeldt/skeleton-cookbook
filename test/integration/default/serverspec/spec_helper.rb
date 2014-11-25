@@ -1,4 +1,4 @@
 require "serverspec"
 
-set :backend, :ssh
+set :backend, :exec
 set :path, "/sbin:/usr/sbin:$PATH"
